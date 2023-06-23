@@ -105,16 +105,16 @@ class Parser:
 
         self.stack.insert(0, node)
 
-    def _stack(self, stack_index: int) -> SyntaxNode:
+    def _stack(self, stack_index: int):
         return self.stack.node(stack_index)
 
-    def _add_elided_pronoun(self, verb: SyntaxNode) -> SyntaxNode:
+    def _add_elided_pronoun(self, verb: SyntaxNode):
         segment = verb.segment
         pronoun = None if not segment else get_pronoun(segment.person, segment.gender, segment.number)
         word_index = self._graph.word_index(verb) + 1
         return self._graph.insert_elided_word(word_index, PartOfSpeech.PRONOUN, pronoun)
 
-    def _subject_relation(self, verb: SyntaxNode) -> Relation:
+    def _subject_relation(self, verb: SyntaxNode):
         segment = verb.segment
         if segment and segment.special:
             return Relation.SPECIAL_SUBJECT
@@ -126,7 +126,7 @@ class Parser:
             if verb.part_of_speech == PartOfSpeech.VERB and not self._has_subject(verb) and verb.word.type == WordType.TOKEN:
                 self._graph.add_edge(self._add_elided_pronoun(verb), verb, self._subject_relation(verb))
 
-    def _has_subject(self, head: SyntaxNode) -> bool:
+    def _has_subject(self, head: SyntaxNode):
         for edge in self._graph.edges:
             if edge.head is head:
                 relation = edge.relation

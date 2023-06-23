@@ -2,10 +2,12 @@ from .person_type import PersonType
 from .gender_type import GenderType
 from .number_type import NumberType
 
-def get_pronoun(person: PersonType, gender: GenderType, number: NumberType) -> str | None:
+
+def get_pronoun(person: PersonType, gender: GenderType, number: NumberType):
 
     # 1S
-    if person == PersonType.FIRST and number == NumberType.SINGULAR: return 'أَنَا'
+    if person == PersonType.FIRST and number == NumberType.SINGULAR:
+        return 'أَنَا'
 
     # 1P
     if person == PersonType.FIRST and number == NumberType.PLURAL:

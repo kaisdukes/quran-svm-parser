@@ -9,6 +9,7 @@ from ..orthography.location import Location
 from ..orthography.verse import Verse
 from ..lexicography.lemma_service import LemmaService
 from ..api.corpus_client import CorpusClient
+from ..api.responses import SegmentResponse
 
 
 class MorphologyService:
@@ -88,7 +89,7 @@ class MorphologyService:
         print(f'Downloaded: {token_count} tokens')
 
     @staticmethod
-    def _write_segment(location, segment: Segment):
+    def _write_segment(location: List[int], segment: SegmentResponse):
         line = []
         for number in location:
             line.append(str(number))
