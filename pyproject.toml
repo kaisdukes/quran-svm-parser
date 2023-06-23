@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "quran-svm-parser"
+version = "0.1.0"
+description = ""
+authors = ["Kais Dukes <dukeskais79@gmail.com>"]
+readme = "README.md"
+packages = [{include = "src"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+requests = "^2.31.0"
+pydantic = "^1.10.9"
+scikit-learn = "^1.2.2"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
