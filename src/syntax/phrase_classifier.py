@@ -81,7 +81,7 @@ class PhraseClassifier:
 
     def _minimum_covering_phrase(graph: SyntaxGraph, segment_node: SyntaxNode):
         index = segment_node.index
-        minimum_covering_phrase = None
+        minimum_covering_phrase: SyntaxNode | None = None
         minimum_covering_start = 0
         minimum_covering_end = 0
 

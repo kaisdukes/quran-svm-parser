@@ -11,6 +11,7 @@ from ..morphology.part_of_speech import PartOfSpeech
 
 
 class SyntaxGraph:
+
     def __init__(self):
         self.words: List[Word] = []
         self.segment_nodes: List[SyntaxNode] = []
