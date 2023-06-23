@@ -62,7 +62,7 @@ class MorphologyService:
         if self.MORPHOLOGY_FILE.exists():
             return
 
-        self.MORPHOLOGY_FILE.parent.mkdir(parents=True, exist_ok=True)
+        self.MORPHOLOGY_FILE.parent.mkdir()
 
         print('Downloading metadata...')
         chapters = client.metadata().chapters
