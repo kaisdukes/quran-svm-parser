@@ -15,7 +15,7 @@ from ..lexicography.lemma_service import LemmaService
 
 
 class SegmentReader:
-    affixes: Dict[str, Tuple[SegmentType, PartOfSpeech, str | None]] = {
+    _affixes: Dict[str, Tuple[SegmentType, PartOfSpeech, str | None]] = {
         '+n:EMPH': (SegmentType.SUFFIX, PartOfSpeech.EMPHATIC, LemmaService.SUFFIX_NOON),
         '+VOC': (SegmentType.SUFFIX, PartOfSpeech.VOCATIVE, LemmaService.VOCATIVE_SUFFIX),
         'A:INTG+': (SegmentType.PREFIX, PartOfSpeech.INTERROGATIVE, None),
@@ -46,7 +46,7 @@ class SegmentReader:
     def __init__(self, lemma_service: LemmaService):
         self.lemma_service = lemma_service
 
-    def read(self, morphology: str, has_stem: bool) -> Segment:
+    def read(self, morphology: str, has_stem: bool):
         if morphology.startswith('POS:'):
             return self._read_stem(morphology)
 
@@ -61,7 +61,7 @@ class SegmentReader:
             else:
                 return self._prefix(PartOfSpeech.PREPOSITION, LemmaService.PREFIX_LA)
 
-        entry = SegmentReader.affixes.get(morphology)
+        entry = SegmentReader._affixes.get(morphology)
         if (entry is None):
             raise ValueError(f'Unknown morphology: {morphology}')
 
