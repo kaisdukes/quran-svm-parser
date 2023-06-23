@@ -10,11 +10,11 @@ class CorpusClient:
     BASE_URL = 'https://qurancorpus.app/api'
 
     def metadata(self):
-        json = self.get('/metadata', None)
+        json = self._get('/metadata', None)
         return MetadataResponse.parse_obj(json)
 
     def morphology(self, location: Location, count: int):
-        json = self.get(
+        json = self._get(
             '/morphology',
             {
                 'location': location,
@@ -25,7 +25,7 @@ class CorpusClient:
 
     def syntax(self, location: GraphLocation):
         _location = location.location
-        json = self.get(
+        json = self._get(
             '/syntax',
             {
                 'location': Location(_location[0], _location[1]),
@@ -33,7 +33,7 @@ class CorpusClient:
             })
         return GraphResponse.parse_obj(json)
 
-    def get(self, relative_path: str, params: Dict):
+    def _get(self, relative_path: str, params: Dict):
         response = requests.get(self.BASE_URL + relative_path, params)
         response.raise_for_status()
         return response.json()
