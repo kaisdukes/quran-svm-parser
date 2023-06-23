@@ -7,8 +7,6 @@ from scipy.sparse import lil_matrix
 from sklearn.svm import SVC
 import numpy as np
 
-from ..morphology.part_of_speech import PartOfSpeech
-
 from .ensemble import Ensemble
 from .instance import Instance
 from ..lexicography.lemma_service import LemmaService
@@ -17,7 +15,7 @@ from ..parser.parser import Parser
 from ..parser.oracle import Oracle
 from ..parser.stack import Stack
 from ..parser.queue import Queue
-from ..parser.parser_action import ParserAction, decode_parser_action, encode_parser_action
+from ..parser.parser_action import ParserAction, encode_parser_action
 from ..lexicography.lemma_service import LemmaService
 from ..syntax.syntax_graph import SyntaxGraph
 
