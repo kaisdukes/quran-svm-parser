@@ -30,9 +30,9 @@ class ActionClassifier:
 
     def action(self):
         action = self._model.action(self.lemma_service, self._graph, self._stack, self._queue)
-        return action if self.is_valid_action(action) else ParserAction.reduce(0)
+        return action if self._is_valid_action(action) else ParserAction.reduce(0)
 
-    def is_valid_action(self, action: ParserAction):
+    def _is_valid_action(self, action: ParserAction):
         if action is None:
             return True
 
@@ -64,7 +64,7 @@ class ActionClassifier:
 
         if type == ActionType.SUBJECT:
             return (self._stack.node(0).part_of_speech == PartOfSpeech.VERB
-                    and not self.has_subject(self._stack.node(0)))
+                    and not self._has_subject(self._stack.node(0)))
 
         if type == ActionType.EMPTY:
             s0 = self._stack.node(0)
@@ -75,7 +75,7 @@ class ActionClassifier:
 
         return False
 
-    def has_subject(self, head: SyntaxNode):
+    def _has_subject(self, head: SyntaxNode):
         for edge in self._graph.edges:
             if edge.head is head:
                 relation = edge.relation
