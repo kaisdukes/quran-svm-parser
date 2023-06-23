@@ -110,7 +110,7 @@ class GraphReader:
                 else self._graph.phrases[node_index - segment_node_count])
 
     @staticmethod
-    def _parse_node_name(name: str) -> int:
+    def _parse_node_name(name: str):
         if name[0] != 'n':
             raise ValueError(f'Node name {name} should start with n.')
 

@@ -8,7 +8,7 @@ from ..syntax.word_type import WordType
 
 class Response(BaseModel):
     class Config:
-        def alias_generator(string: str) -> str:
+        def alias_generator(string: str):
             return re.sub(r'_([a-z])', lambda m: m.group(1).upper(), string)
 
 

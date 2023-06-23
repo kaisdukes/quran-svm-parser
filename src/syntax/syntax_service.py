@@ -44,7 +44,7 @@ class SyntaxService:
             writer.write_graphs(graphs)
 
     @staticmethod
-    def _build_graph(morphology_service: MorphologyService, graph_response: GraphResponse) -> SyntaxGraph:
+    def _build_graph(morphology_service: MorphologyService, graph_response: GraphResponse):
         graph = SyntaxGraph()
 
         for word in graph_response.words:
@@ -74,7 +74,7 @@ class SyntaxService:
         return graph
 
     @staticmethod
-    def _node(graph: SyntaxGraph, index: int) -> SyntaxNode:
+    def _node(graph: SyntaxGraph, index: int):
         segment_nodes = graph.segment_nodes
         segment_node_count = len(segment_nodes)
         if index < segment_node_count:
@@ -82,7 +82,7 @@ class SyntaxService:
         return graph.phrases[index - segment_node_count]
 
     @staticmethod
-    def _token(morphology_service: MorphologyService, token_response: TokenResponse | None) -> Token | None:
+    def _token(morphology_service: MorphologyService, token_response: TokenResponse | None):
         if token_response is None:
             return None
         location = token_response.location

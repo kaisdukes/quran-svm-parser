@@ -71,7 +71,7 @@ class SegmentReader:
         else:
             return self._suffix(part_of_speech, lemma)
 
-    def _read_stem(self, morphology: str) -> Segment:
+    def _read_stem(self, morphology: str):
         tags = morphology.split(' ')
         part_of_speech = PartOfSpeech.parse(tags[0][4:])
         segment = Segment(SegmentType.STEM, part_of_speech)
@@ -155,13 +155,13 @@ class SegmentReader:
             else:
                 raise ValueError(f'Unknown tag: {tag}')
 
-    def _prefix(self, part_of_speech: PartOfSpeech, lemma: str = None) -> Segment:
+    def _prefix(self, part_of_speech: PartOfSpeech, lemma: str = None):
         segment = Segment(SegmentType.PREFIX, part_of_speech)
         if lemma is not None:
             self._set_lemma(segment, lemma)
         return segment
 
-    def _suffix(self, part_of_speech: PartOfSpeech, lemma: str = None) -> Segment:
+    def _suffix(self, part_of_speech: PartOfSpeech, lemma: str = None):
         segment = Segment(SegmentType.SUFFIX, part_of_speech)
         if lemma is not None:
             self._set_lemma(segment, lemma)

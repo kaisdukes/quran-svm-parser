@@ -33,7 +33,7 @@ class CorpusClient:
             })
         return GraphResponse.parse_obj(json)
 
-    def get(self, relative_path: str, params: Dict) -> Union[Dict, List[Dict]]:
+    def get(self, relative_path: str, params: Dict):
         response = requests.get(self.BASE_URL + relative_path, params)
         response.raise_for_status()
         return response.json()

@@ -21,11 +21,11 @@ class Stack:
         else:
             raise ValueError(f"Can't reduce: {stack_index}")
 
-    def node(self, stack_index: int) -> SyntaxNode | None:
+    def node(self, stack_index: int):
         size = len(self._nodes)
         index = size - stack_index - 1
         return self._nodes[index] if 0 <= index < size else None
 
     @property
-    def size(self) -> int:
+    def size(self):
         return len(self._nodes)

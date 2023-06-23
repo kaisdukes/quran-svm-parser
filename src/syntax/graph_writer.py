@@ -58,13 +58,12 @@ class GraphWriter:
         # batch
         self._writer.write('\ngo\n')
 
-    def _write_word(self, index: int, word: Word) -> int:
-        if word.type in (WordType.TOKEN, WordType.REFERENCE):
-            return self._write_token(index, word)
-        elif word.type == WordType.ELIDED:
+    def _write_word(self, index: int, word: Word):
+        if word.type == WordType.ELIDED:
             return self._write_elided_word(index, word)
+        return self._write_token(index, word)
 
-    def _write_token(self, index: int, word: Word) -> int:
+    def _write_token(self, index: int, word: Word):
 
         # nodes
         start = index
@@ -83,7 +82,7 @@ class GraphWriter:
         self._writer.write(')')
         return index - start
 
-    def _write_elided_word(self, index: int, word: Word) -> int:
+    def _write_elided_word(self, index: int, word: Word):
         self._write(index)
         self._writer.write(' = ')
         self._writer.write(word.elided_part_of_speech.tag)

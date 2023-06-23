@@ -25,7 +25,7 @@ class SyntaxNode:
         return self.word.elided_part_of_speech if self.word.type == WordType.ELIDED else self.segment.part_of_speech
 
     @property
-    def segment(self) -> Segment:
+    def segment(self):
         return None if self.word is None or self.word.type == WordType.ELIDED else self.word.token.segment(self.segment_number)
 
     def __eq__(self, other: 'SyntaxNode'):

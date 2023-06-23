@@ -3,7 +3,7 @@ from .syntax_node import SyntaxNode
 from ..morphology.part_of_speech import PartOfSpeech
 
 
-def subgraph_end(graph: SyntaxGraph, node: SyntaxNode) -> SyntaxNode | None:
+def subgraph_end(graph: SyntaxGraph, node: SyntaxNode):
 
     if node.is_phrase:
         return None

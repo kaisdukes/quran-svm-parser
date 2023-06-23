@@ -10,5 +10,5 @@ class Token:
         self.location = location
         self.segments: List[Segment]
 
-    def segment(self, segment_number: int) -> Segment:
+    def segment(self, segment_number: int):
         return self.segments[segment_number - 1]
