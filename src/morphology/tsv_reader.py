@@ -40,8 +40,8 @@ class TsvReader:
         self.tokens.append(Token(self._location))
 
     def _read_segments(self):
-        stem = None
-        object_pronoun = None
+        stem: Segment | None = None
+        object_pronoun: Segment | None = None
 
         segment_count = len(self._morphemes)
         segments: List[Segment | None] = [None]*segment_count

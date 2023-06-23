@@ -7,11 +7,11 @@ from ..morphology.segment import Segment
 class SyntaxNode:
 
     def __init__(self):
-        self.word: Word = None
+        self.word: Word | None = None
         self.segment_number: int = 0
-        self.phrase_type: PhraseType = None
-        self.start: SyntaxNode = None
-        self.end: SyntaxNode = None
+        self.phrase_type: PhraseType | None = None
+        self.start: SyntaxNode | None = None
+        self.end: SyntaxNode | None = None
         self.index: int = 0
 
     @property
@@ -40,10 +40,7 @@ class SyntaxNode:
             return False
 
         if self.word.type == WordType.ELIDED:
-            if self.word.elided_part_of_speech != other.word.elided_part_of_speech:
-                return False
-            if self.word.elided_text is None:
-                return other.word.elided_text is None
-            return self.word.elided_text == other.word.elided_text
+            return (self.word.elided_part_of_speech == other.word.elided_part_of_speech
+                    and self.word.elided_text == other.word.elided_text)
 
         return self.segment is other.segment

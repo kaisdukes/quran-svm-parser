@@ -16,14 +16,14 @@ class Segment:
     def __init__(self, type: SegmentType, part_of_speech: PartOfSpeech):
         self.type = type
         self.part_of_speech = part_of_speech
-        self.segment_number: int = None
-        self.lemma: str = None
-        self.person: PersonType = None
-        self.gender: GenderType = None
-        self.number: NumberType = None
-        self.mood: MoodType = None
-        self.voice: VoiceType = None
-        self.case: CaseType = None
-        self.state: StateType = None
-        self.pronoun_type: PronounType = None
-        self.special: SpecialType = None
+        self.segment_number: int | None = None
+        self.lemma: str | None = None
+        self.person: PersonType | None = None
+        self.gender: GenderType | None = None
+        self.number: NumberType | None = None
+        self.mood: MoodType | None = None
+        self.voice: VoiceType | None = None
+        self.case: CaseType | None = None
+        self.state: StateType | None = None
+        self.pronoun_type: PronounType | None = None
+        self.special: SpecialType | None = None
