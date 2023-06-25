@@ -14,7 +14,7 @@ For a deeper understanding of the existing SVM parser, we recommend Chapters 9 a
 
 ## Please Use Official APIs and Avoid Distributing Draft Data
 
-The Quranic Arabic Corpus provides comprehensive linguistic annotation for each word in the Quran based on authentic traditional sources, while respecting its deep cultural significance. Linguistic analysis of the Quran requires expert knowledge and is subject to continual refinement and improvement. The code in this repository uses official Corpus APIs to locally cache the Quranic Treebank. Given the constant refinement by our Linguistic Team and our partner universities, we kindly ask to avoid redistributing this draft data. Please promote the use of official APIs to ensure users alway have the most up-to-date and accurate data available.
+The Quranic Arabic Corpus provides comprehensive linguistic annotation for each word in the Quran based on authentic traditional sources, while respecting its deep cultural significance. Linguistic analysis of the Quran requires expert knowledge and is subject to continual refinement and improvement. The code in this repository uses official Corpus APIs to locally cache the Quranic Treebank. Given the constant refinement by our Linguistic Team and our partner universities, we kindly ask to avoid redistributing this draft data. Please promote the use of official APIs to ensure users always have the most up-to-date and accurate data available.
 
 ## Getting Started
 
