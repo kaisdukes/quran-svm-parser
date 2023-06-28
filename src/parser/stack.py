@@ -29,3 +29,6 @@ class Stack:
     @property
     def size(self):
         return len(self._nodes)
+
+    def __str__(self):
+        return '[' + ' '.join(str(node) for node in self._nodes[::-1]) + ']'

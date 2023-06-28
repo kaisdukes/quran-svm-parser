@@ -9,3 +9,6 @@ class Edge:
     dependent: SyntaxNode
     head: SyntaxNode
     relation: Relation
+
+    def __str__(self):
+        return f'{self.relation.tag}: {self.dependent} -> {self.head}'

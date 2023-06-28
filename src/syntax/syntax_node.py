@@ -44,3 +44,6 @@ class SyntaxNode:
                     and self.word.elided_text == other.word.elided_text)
 
         return self.segment is other.segment
+
+    def __str__(self):
+        return self.phrase_type.tag if self.is_phrase else self.part_of_speech.tag

@@ -137,6 +137,13 @@ class SyntaxGraph:
                 graph.add_word(word.type, word.token, None, None)
         return graph
 
+    @property
+    def location(self):
+        for word in self.words:
+            if word.type == WordType.TOKEN:
+                return word.token.location
+        raise ValueError
+
     def _segment_node_index(self, word: Word):
         for i in range(len(self.segment_nodes)):
             if self.segment_nodes[i].word is word:

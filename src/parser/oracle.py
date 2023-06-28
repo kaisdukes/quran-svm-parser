@@ -17,6 +17,7 @@ class Oracle:
         self._output_graph = output_graph
         self._parser = Parser(None, None, output_graph)
         self._expected_node_map: Dict[int, SyntaxNode] = {}
+        self._trace_enabled = False
         self._build_node_map()
 
     def expected_actions(self) -> List[ParserAction]:
@@ -35,12 +36,15 @@ class Oracle:
             edge = self._expected_edge(s0, s1)
             if edge is not None and self._output_graph.edge(s0, s1) is None:
                 if edge.dependent is self._expected_node(s0) and self._output_graph.head(s0) is None:
+                    self._trace('RIGHT (s0 and s1 form a edge)')
                     return ParserAction.right(edge.relation)
                 if not self._output_graph.head(s1):
+                    self._trace('LEFT (s0 and s1 form a edge)')
                     return ParserAction.left(edge.relation)
 
         # reduce phrase internals: s1 has all edges accounted for?
         if self._covers(s0, s1) and self._has_all_edges(s1):
+            self._trace('REDUCE(1) (phrase internals: s1 has all edges accounted for)')
             return ParserAction.reduce(1)
 
         # Build a phrase now if the two top nodes on the stack are adjacent. However delay
@@ -48,34 +52,44 @@ class Oracle:
         if (self._expected_phrase(s1, s0) is not None and self._output_graph.phrase(s1, s0) is None
                 and s0.index == s1.index + 1
                 and (not self._has_any_expected_dependents(s0) or self._has_any_dependents(s0))):
+            self._trace('PHRASE (top nodes on the stack are adjacent)')
             return ParserAction.phrase()
 
         if self._add_subgraph():
             if self._add_elided_subject():
+                self._trace('SUBJECT (elided subject at root of subraph)')
                 return ParserAction.subject()
+            self._trace('SUBGRAPH (root of subgraph detected)')
             return ParserAction.subgraph()
 
         q0 = self._parser.queue.peek()
         if q0 is None and self._add_elided_subject():
+            self._trace('SUBJECT (elided subject)')
             return ParserAction.subject()
 
         if s0 is not None and self._has_all_edges(s0):
+            self._trace('REDUCE(0) (s0 has all edges)')
             return ParserAction.reduce(0)
 
         if q0 is not None:
+            self._trace('SHIFT (queue not empty)')
             return ParserAction.shift()
 
         s2 = self._stack(2)
         if s2 is not None and self._expected_edge(s0, s2) is not None:
+            self._trace('REDUCE(1) (expected edge s0 s2)')
             return ParserAction.reduce(1)
 
         empty = self._add_empty()
         if empty is not None:
+            self._trace('EMPTY (empty category detected')
             return ParserAction.empty(empty)
 
         if s0 is not None:
+            self._trace('REDUCE(0) (stack not empty)')
             return ParserAction.reduce(0)
 
+        self._trace('STOP (no other actions apply)')
         return None
 
     def _add_empty(self):
@@ -237,3 +251,7 @@ class Oracle:
                 output_node = self._output_graph.segment_nodes[index]
                 index += 1
                 self._expected_node_map[id(output_node)] = expected_node
+
+    def _trace(self, action: str):
+        if self._trace_enabled:
+            print(f'{action} @ {self._parser.stack}')
